@@ -9,5 +9,5 @@
     <org.eventb.core.axiom name="-" org.eventb.core.label="axm2" org.eventb.core.predicate="Lift ⊆ {0‥2}"/>
     <org.eventb.core.axiom name="." org.eventb.core.label="axm3" org.eventb.core.predicate="TotalShaft ∈ N"/>
     <org.eventb.core.axiom name="/" org.eventb.core.label="axm4" org.eventb.core.predicate="TotalShaft = 2"/>
-    <org.eventb.core.axiom name="0" org.eventb.core.label="axm5" org.eventb.core.predicate="Shaft ∈ "/>
+    <org.eventb.core.axiom name="0" org.eventb.core.label="axm5" org.eventb.core.predicate="Shaft ∈ ℕ1 " org.eventb.core.theorem="true"/>
 </org.eventb.core.contextFile>

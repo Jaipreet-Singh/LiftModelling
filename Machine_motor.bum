@@ -6,7 +6,7 @@
     <org.eventb.core.seesContext name="(" org.eventb.core.target="Context_CabinMovingDirection"/>
     <org.eventb.core.seesContext name=")" org.eventb.core.target="Context_CabinFloor"/>
     <org.eventb.core.seesContext name="*" org.eventb.core.target="Context_CabinMotor"/>
-    <org.eventb.core.refinesMachine name="+" org.eventb.core.target="Machine_CabinMovingDirection"/>
+    <org.eventb.core.refinesMachine name="+" org.eventb.core.target="Machine_Shaft"/>
     <org.eventb.core.variable de.prob.units.inferredUnitPragmaAttribute="" de.prob.units.unitPragmaAttribute="" name="," org.eventb.core.identifier="floor"/>
     <org.eventb.core.variable de.prob.units.inferredUnitPragmaAttribute="" de.prob.units.unitPragmaAttribute="" name="-" org.eventb.core.identifier="direction"/>
     <org.eventb.core.variable de.prob.units.inferredUnitPragmaAttribute="" de.prob.units.unitPragmaAttribute="" name="." org.eventb.core.identifier="motor"/>
@@ -64,20 +64,29 @@
     </org.eventb.core.event>
     <org.eventb.core.invariant name="@" org.eventb.core.label="inv4" org.eventb.core.predicate="motor = DragLeft ⇒ direction = Left"/>
     <org.eventb.core.invariant name="A" org.eventb.core.label="inv5" org.eventb.core.predicate="motor = DragRight ⇒ direction = Right" org.eventb.core.theorem="true"/>
-    <org.eventb.core.event name="B" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="MotorDragsLeft">
-        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="direction = Up ∨ direction = Down"/>
-        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="floor = Bottom_Floor ∨ floor = Top_Floor"/>
+    <org.eventb.core.event name="B" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.label="MotorDragsLeft">
         <org.eventb.core.guard name=")" org.eventb.core.label="grd3" org.eventb.core.predicate="motor = Started"/>
         <org.eventb.core.action name="*" org.eventb.core.assignment="motor ≔ DragLeft" org.eventb.core.label="act1"/>
+        <org.eventb.core.refinesEvent name="+" org.eventb.core.target="MotorDragsLeft"/>
     </org.eventb.core.event>
-    <org.eventb.core.event name="C" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="MotorDragsRight">
-        <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="direction = Up ∨ direction = Down"/>
-        <org.eventb.core.guard name="(" org.eventb.core.label="grd2" org.eventb.core.predicate="floor = Bottom_Floor ∨ floor = Top_Floor"/>
+    <org.eventb.core.event name="C" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.label="MotorDragsRight">
         <org.eventb.core.guard name=")" org.eventb.core.label="grd3" org.eventb.core.predicate="motor = Started"/>
         <org.eventb.core.action name="*" org.eventb.core.assignment="motor ≔ DragRight" org.eventb.core.label="act1"/>
+        <org.eventb.core.refinesEvent name="+" org.eventb.core.target="MotorDragsRight"/>
     </org.eventb.core.event>
     <org.eventb.core.event name="D" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="MotorStarts">
         <org.eventb.core.guard name="'" org.eventb.core.label="grd1" org.eventb.core.predicate="motor = Stopped"/>
         <org.eventb.core.action name="(" org.eventb.core.assignment="motor ≔ Started" org.eventb.core.label="act1"/>
+    </org.eventb.core.event>
+    <org.eventb.core.seesContext name="E" org.eventb.core.target="Context_Shaft"/>
+    <org.eventb.core.event name="F" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.label="NextShaftMoveDown">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="NextShaftMoveDown"/>
+        <org.eventb.core.guard name="(" org.eventb.core.label="grd4" org.eventb.core.predicate="motor = Started "/>
+        <org.eventb.core.action name=")" org.eventb.core.assignment="motor ≔ DragDown" org.eventb.core.label="act3"/>
+    </org.eventb.core.event>
+    <org.eventb.core.event name="G" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.label="NextShaftMoveUp">
+        <org.eventb.core.refinesEvent name="'" org.eventb.core.target="NextShaftMoveUp"/>
+        <org.eventb.core.action name="(" org.eventb.core.assignment="motor ≔ DragUp" org.eventb.core.label="act3"/>
+        <org.eventb.core.guard name=")" org.eventb.core.label="grd3" org.eventb.core.predicate="motor = Started"/>
     </org.eventb.core.event>
 </org.eventb.core.machineFile>
